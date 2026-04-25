@@ -5,21 +5,28 @@ export const useTaskStore = defineStore('tasks', {
     tasks: [
       {
         id: 1,
-        title: 'Finish web design homework',
+        title: 'Work on ApplyMate project',
         category: 'School',
         priority: 'High',
         done: false,
       },
       {
         id: 2,
-        title: 'Apply to internship',
-        category: 'Career',
+        title: 'Finish quiz for Cyber Security class',
+        category: 'School',
         priority: 'Medium',
-        done: true,
+        done: false,
       },
       {
         id: 3,
-        title: 'Update portfolio ideas',
+        title: 'Send emails to executives with project plan',
+        category: 'Career',
+        priority: 'High',
+        done: false,
+      },
+      {
+        id: 4,
+        title: 'Take dog to appointment',
         category: 'Personal',
         priority: 'Low',
         done: false,
@@ -29,12 +36,21 @@ export const useTaskStore = defineStore('tasks', {
 
   getters: {
     totalTasks: (state) => state.tasks.length,
-    completedTasks: (state) => state.tasks.filter(task => task.done).length,
-    pendingTasks: (state) => state.tasks.filter(task => !task.done).length,
-    highPriorityTasks: (state) => state.tasks.filter(task => task.priority === 'High'),
+
+    completedTasks: (state) =>
+      state.tasks.filter(task => task.done).length,
+
+    pendingTasks: (state) =>
+      state.tasks.filter(task => !task.done).length,
+
+    highPriorityTasks: (state) =>
+      state.tasks.filter(task => task.priority === 'High'),
+
     completionRate: (state) => {
       if (state.tasks.length === 0) return 0
-      return Math.round((state.tasks.filter(task => task.done).length / state.tasks.length) * 100)
+      return Math.round(
+        (state.tasks.filter(task => task.done).length / state.tasks.length) * 100
+      )
     }
   },
 
